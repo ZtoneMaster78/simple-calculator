@@ -19,6 +19,20 @@ body {
     font-display: swap;
     height: inherit;
     justify-content: center;
+    background-size: 300% 300%;
+    animation: gradientAnimation 12s ease-in-out infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 .wrapper {
@@ -27,7 +41,7 @@ body {
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(35, 35, 35, 0.15);
     color: #232323;
-    background: rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.3);
     border: 5px solid rgba(255, 255, 255, 0.35);
     flex-basis: 400px;
     height: 540px;
@@ -59,38 +73,57 @@ body {
     backdrop-filter: blur(5.5px);
     -webkit-backdrop-filter: blur(5.5px);
     background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.01);
+    border: 2px solid rgba(205, 205, 205, 0.4);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
+    box-shadow: inset 0 -1px 0 #aaa, 0 4px 0 #bbb;
     color: #232323;
     flex-basis: 20%;
     font-family: inherit;
     font-size: 24px;
     height: 65px;
+    cursor: pointer;
+    transition: transform 0.1s, font-size 0.1s, box-shadow 0.25s ease;
 }
 
 .calc-button:last-child {
     backdrop-filter: blur(5.5px);
     -webkit-backdrop-filter: blur(5.5px);
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.01);
+    background: rgba(244, 14, 129, 0.75);
+    border: 2px solid rgba(205, 205, 205, 0.4);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
+    box-shadow: 0 5px 0 rgba(197, 11, 104, 0.2);
+    box-shadow: inset 0 -1px 0 #db52c2, 0 4px 0 #d033a6;
     color: #fff;
-    background: #d72880;
+    transition: transform 0.1s, font-size 0.1s, font-weight 0.1s, box-shadow 0.25s ease;
 }
 
 .calc-button:last-child:hover {
-    background-color: inherit;
-    color: inherit;
+    font-size: 25px;
+    font-weight: 800;
+    transform: scale(1.1);
+    background: rgba(244, 14, 129, 0.30);
 }
 
 .calc-button:hover {
+    font-size: 25px;
+    transform: scale(1.1);
     background-color: inherit;
 }
 
 .calc-button:active {
-    background-color: #ffef78;
+    box-shadow: none;
+    font-size: 30px;
+    transform: scale(1) translateY(5px);
+    background: rgba(255, 255, 255, 0.75);
+    border: 2px solid rgba(205, 205, 205, 0.4);
+}
+
+.calc-button:last-child:active {
+    box-shadow: none;
+    font-size: 30px;
+    transform: scale(1) translateY(5px);
+    background: rgba(244, 14, 129, 0.75);
+    border: 2px solid rgba(205, 205, 205, 0.4);
 }
 
 .double {
