@@ -83,51 +83,82 @@ function handleNumber(numberString) {
 }
 
 function init() {
-    const buttons = document.querySelectorAll(".calc-button");
+    // document.querySelector('.calc-buttons').addEventListener('click', function(event) {
+    //     buttonClick(event.target.innerText);
+    // });
+    document.querySelectorAll('.calc-button').forEach(button => {
+        const value = button.innerText;
 
-    document.querySelector('.calc-buttons').addEventListener('click', function(event) {
-        buttonClick(event.target.innerText);
+        button.addEventListener("mousedown", () => holdStart(value));
+        button.addEventListener("mouseup", holdStop);
+        button.addEventListener("mouseleave", holdStop); // in case the mouse leaves the button
     });
+
 }
 
 init();
+
+const pressedKeys = new Set;
 
 document.addEventListener("keydown", function(event) {
     const active = document.activeElement;
     const isButton = active && active.classList.contains("calc-button");
 
-    if (isButton) {
-        return;
-    }
+    if (isButton) return;
     
-    const key = event.key;
+    const key = normalizeKey(event.key);
+    buttonClick(key);
 
-    if (!isNaN(key)) {
-        buttonClick(key);
-    }
+    if (pressedKeys.has(key)) return;
 
-    switch (key) {
-        case "Enter":
-        case "=":
-            buttonClick("=");
-            break;
-        case "Backspace":
-            buttonClick("←");
-            break;
-        case "Escape":
-            buttonClick("C");
-            break;
-        case "+":
-            buttonClick("+");
-            break;
-        case "-":
-            buttonClick("−");
-            break;
-        case "*":
-            buttonClick("×");
-            break;
-        case "/":
-            buttonClick("÷");
-            break;
-    }
+    pressedKeys.add(key);
+    highlightButton(key);
 });
+
+document.addEventListener("keyup", function(event) {
+    const key = normalizeKey(event.key);
+    pressedKeys.delete(key);
+    unhighlightButton(key); // remove "pressed"
+});
+
+function normalizeKey (key) {
+    if (key === "Enter" || key === "=") return "=";
+    if (key === "Backspace") return "←";
+    if (key === "Escape") return "C";
+    if (key === "*") return "×";
+    if (key === "/") return "÷";
+    if (key === "-") return "−";
+    return key; // '+" is still "+"
+}
+
+function highlightButton(keyText) {
+    const buttons = document.querySelectorAll(".calc-button");
+    buttons.forEach(button => {
+        if (button.innerText === keyText) {
+            button.classList.add("pressed");
+        }
+    });
+}
+
+function unhighlightButton(keyText) {
+    const buttons = document.querySelectorAll(".calc-button");
+    buttons.forEach(button => {
+        if (button.innerText === keyText) {
+            button.classList.remove("pressed");
+        }
+    });
+}
+
+let holdInterval = null;
+
+function holdStart(value) {
+    buttonClick(value);
+    holdInterval = setInterval(() => {
+        buttonClick(value);
+    }, 150); // adjust this delay for spam speed
+}
+
+function holdStop() {
+    clearInterval(holdInterval);
+    holdInterval = null;
+}
