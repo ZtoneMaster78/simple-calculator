@@ -22,7 +22,7 @@ function handleSymbol(symbol) {
             break;
         case '=':
             if (previousOperator === null) {
-                return
+                return;
             }
 
             flushOperation(parseInt(buffer));
@@ -83,9 +83,44 @@ function handleNumber(numberString) {
 }
 
 function init() {
+    const buttons = document.querySelectorAll(".calc-button");
+
     document.querySelector('.calc-buttons').addEventListener('click', function(event) {
         buttonClick(event.target.innerText);
-    })
+    });
 }
 
 init();
+
+document.addEventListener("keydown", function(event) {
+    const key = event.key;
+
+    if (!isNaN(key)) {
+        buttonClick(key);
+    }
+
+    switch (key) {
+        case "Enter":
+        case "=":
+            buttonClick("=");
+            break;
+        case "Backspace":
+            buttonClick("←");
+            break;
+        case "Escape":
+            buttonClick("C");
+            break;
+        case "+":
+            buttonClick("+");
+            break;
+        case "-":
+            buttonClick("−");
+            break;
+        case "*":
+            buttonClick("×");
+            break;
+        case "/":
+            buttonClick("÷");
+            break;
+    }
+});
