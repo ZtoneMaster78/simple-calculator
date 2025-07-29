@@ -93,6 +93,13 @@ function init() {
 init();
 
 document.addEventListener("keydown", function(event) {
+    const active = document.activeElement;
+    const isButton = active && active.classList.contains("calc-button");
+
+    if (isButton) {
+        return;
+    }
+    
     const key = event.key;
 
     if (!isNaN(key)) {
