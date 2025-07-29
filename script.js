@@ -11,6 +11,8 @@ function buttonClick(value) {
         handleNumber(value);
     }
 
+    if (isValidInput(value)) playClickSound();
+
     screen.innerText = buffer;
 }
 
@@ -83,9 +85,6 @@ function handleNumber(numberString) {
 }
 
 function init() {
-    // document.querySelector('.calc-buttons').addEventListener('click', function(event) {
-    //     buttonClick(event.target.innerText);
-    // });
     document.querySelectorAll('.calc-button').forEach(button => {
         const value = button.innerText;
 
@@ -161,4 +160,38 @@ function holdStart(value) {
 function holdStop() {
     clearInterval(holdInterval);
     holdInterval = null;
+}
+
+const clickSound = new Audio("sounds/classic-click.wav");
+const hoverSound = new Audio("sounds/keyboard.mp3");
+
+function playClickSound() {
+    const click = clickSound.cloneNode();
+    click.volume = 0.2;
+    click.play();
+}
+
+document.querySelectorAll('.calc-button').forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        const hover = hoverSound.cloneNode(); // allow overlap
+        hover.volume = 0.3;
+        hover.play();
+    });
+});
+
+function isValidInput(value) {
+    if (!isNaN(value)) return true;
+
+    switch (value) {
+        case 'C':
+        case '=':
+        case '←':
+        case '+':
+        case '−':
+        case '×':
+        case '÷':
+            return true;
+    }
+
+    return false;
 }
