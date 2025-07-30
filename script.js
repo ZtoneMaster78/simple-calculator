@@ -195,3 +195,23 @@ function isValidInput(value) {
 
     return false;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (!toggleBtn) return; // if the button isn't found, bail
+
+  const icon = toggleBtn.querySelector('i');
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark-mode");
+    icon.classList.replace("fa-moon", "fa-sun");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    icon.classList.toggle("fa-sun");
+    icon.classList.toggle("fa-moon");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+});

@@ -1,7 +1,68 @@
 /* ---------- GLOBAL RESET + ROOT SETTINGS ---------- */
-html {
-    box-sizing: border-box;
-    height: 100%;
+:root {
+    --bg-gradient-start: #eb92be;
+    --bg-gradient-mid: #ffef78;
+    --bg-gradient-end: #63c9b4;
+
+    --wrapper-bg: rgba(255, 255, 255, 0.3);
+
+    --glass-blur: blur(4px);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-shadow: rgba(35, 35, 35, 0.15);
+
+    --result-screen-bg: rgba(255, 255, 255, 0.75);
+    --result-screen-shadow: rgba(35, 35, 35, 0.1);
+    --result-screen-border: rgba(255, 255, 255, 0.01);
+
+    --text-color: #232323;
+    --text-special-color: #fff;
+
+    --button-bg: rgba(255, 255, 255, 0.75);
+    --button-hover: rgba(255, 255, 255, 0.3);
+    --button-pressed: rgba(255, 255, 255, 0.75);
+    --button-border: rgba(205, 205, 205, 0.4);
+    --button-shadow-inset: inset 0 -1px 0 #aaa;
+    --button-shadow-outset: 0 4px 0 #bbb;
+
+    --button-special-bg: rgba(244, 14, 129, 0.75);
+    --button-special-hover: rgba(244, 14, 129, 0.3);
+    --button-special-pressed: rgba(244, 14, 129, 0.75);
+    --button-special-border: rgba(205, 205, 205, 0.4);
+    --button-special-shadow-inset: inset 0 -1px 0 #db52c2;
+    --button-special-shadow-outset: 0 4px 0 #d033a6;
+}
+
+.dark-mode {
+    --bg-gradient-start: #001f3f;
+    --bg-gradient-mid: #003f5c;
+    --bg-gradient-end: #0077b6;
+
+    --wrapper-bg: rgba(20, 30, 40, 0.6);
+
+    --glass-blur: blur(6px);
+    --glass-border: rgba(0, 200, 255, 0.15);
+    --glass-shadow: rgba(0, 255, 255, 0.05);
+
+    --result-screen-bg: rgba(10, 25, 35, 0.85);
+    --result-screen-shadow: rgba(0, 200, 255, 0.2);
+    --result-screen-border: rgba(0, 255, 255, 0.05);
+
+    --text-color: #e0f7ff;
+    --text-special-color: #ffffff;
+
+    --button-bg: rgba(30, 50, 70, 0.85);
+    --button-hover: rgba(0, 255, 255, 0.2);
+    --button-pressed: rgba(0, 200, 255, 0.3);
+    --button-border: rgba(0, 200, 255, 0.2);
+    --button-shadow-inset: inset 0 -1px 0 #00aaff;
+    --button-shadow-outset: 0 4px 0 #003355;
+
+    --button-special-bg: rgba(0, 200, 255, 0.85);
+    --button-special-hover: rgba(0, 200, 255, 0.5);
+    --button-special-pressed: rgba(0, 255, 255, 0.9);
+    --button-special-border: rgba(255, 255, 255, 0.2);
+    --button-special-shadow-inset: inset 0 -1px 0 #00eaff;
+    --button-special-shadow-outset: 0 4px 0 #0088aa;
 }
 
 *, 
@@ -12,6 +73,11 @@ html {
     padding: 0;
 }
 
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
 body {
     display: flex;
     align-items: center;
@@ -19,7 +85,7 @@ body {
     height: inherit;
     font-family: 'Dosis';
     font-display: auto;
-    background: linear-gradient(320deg, #eb92be, #ffef78, #63c9b4);
+    background: linear-gradient(320deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
     background-size: 300% 300%;
     animation: gradientAnimation 12s ease-in-out infinite;
 }
@@ -29,28 +95,47 @@ body {
   50% { background-position: 100% 100%; }
 }
 
+#theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  z-index: 999;
+}
+
+#theme-toggle:hover {
+  color: var(--button-special-bg);
+  transform: rotate(20deg);
+}
+
 /* ---------- CALCULATOR CONTAINER ---------- */
 .wrapper {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 5px solid rgba(255, 255, 255, 0.35);
+    background: var(--wrapper-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 5px solid var(--glass-border);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.15);
-    color: #232323;
+    box-shadow: 0 4px 30px var(--glass-shadow);
+    color: var(--text-color);
     flex-basis: 400px;
     height: 540px;
     padding: 20px 35px 40px;
 }
 
+/* ---------- RESULT SCREEN ---------- */
 .result-screen {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(5.5px);
-    -webkit-backdrop-filter: blur(5.5px);
-    border: 1px solid rgba(255, 255, 255, 0.01);
+    background: var(--result-screen-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--result-screen-border);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1);
-    color: #232323;
+    box-shadow: 0 4px 30px var(--result-screen-shadow);
+    color: var(--text-color);
     font-size: 35px;
     overflow: auto;
     padding: 20px;
@@ -58,45 +143,34 @@ body {
     width: 326px;
 }
 
-/* ---------- BASE BUTTON STYLE ---------- */
+/* ---------- BASE BUTTON STYLES ---------- */
 .calc-button-row {
     display: flex;
     justify-content: space-between;
     margin: 5% 0;
 }
 
+/* ---------- REGULAR BUTTON STYLES ---------- */
 .calc-button {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(5.5px);
-    -webkit-backdrop-filter: blur(5.5px);
-    border: 2px solid rgba(205, 205, 205, 0.4);
+    background: var(--button-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--button-border);
     border-radius: 16px;
-    box-shadow: inset 0 -1px 0 #aaa, 0 4px 0 #bbb;
-    color: #232323;
+    box-shadow: var(--button-shadow-inset), var(--button-shadow-outset);
+    color: var(--text-color);
     cursor: pointer;
     flex-basis: 20%;
     font-family: inherit;
     font-size: 24px;
     height: 65px;
-    transition: transform 0.1s  ease, font-size 0.1s ease, box-shadow 0.25s ease;
-}
-
-.calc-button:last-child {
-    background: rgba(244, 14, 129, 0.75);
-    box-shadow: inset 0 -1px 0 #db52c2, 0 4px 0 #d033a6;
-    color: #fff;
-    transition: transform 0.1s ease, font-size 0.1s ease, font-weight 0.1s ease, box-shadow 0.25s ease;
+    transition: transform 0.1s ease, font-size 0.1s ease, box-shadow 0.25s ease;
 }
 
 .calc-button:hover {
     font-size: 25px;
     transform: scale(1.1);
-    background: inherit;
-}
-
-.calc-button:last-child:hover {
-    font-weight: 800;
-    background: rgba(244, 14, 129, 0.30);
+    background: var(--button-hover);
 }
 
 .calc-button:active, 
@@ -104,14 +178,41 @@ body {
     box-shadow: none;
     font-size: 30px;
     transform: translateY(5px);
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--button-pressed);
 }
 
-.calc-button:last-child:active, 
-.calc-button.pressed:last-child {
-    background: rgba(244, 14, 129, 0.75);
+/* ---------- SPECIAL BUTTON STYLES ---------- */
+.calc-button.special {
+    background: var(--button-special-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--button-special-border);
+    border-radius: 16px;
+    box-shadow: var(--button-special-shadow-inset), var(--button-special-shadow-outset);
+    color: var(--text-special-color);
+    cursor: pointer;
+    flex-basis: 20%;
+    font-family: inherit;
+    font-size: 24px;
+    height: 65px;
+    transition: transform 0.1s ease, font-size 0.1s ease, box-shadow 0.25s ease;
+}
+
+.calc-button.special:hover {
+    font-size: 25px;
+    transform: scale(1.1);
+    background: var(--button-special-hover);
+}
+
+
+.calc-button.special:active, 
+.calc-button.special.pressed {
+    box-shadow: none;
+    font-size: 30px;
+    transform: translateY(5px);
+    background: var(--button-special-pressed);
 }
 
 /* ---------- FLEX SIZE MODIFIERS ---------- */
-.double-length { flex-basis: 47%; }
-.triple-length { flex-basis: 73%; }
+.double-length { flex-basis: 47% !important;}
+.triple-length { flex-basis: 73% !important;}
