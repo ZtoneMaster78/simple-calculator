@@ -6,15 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
-    <title>Calculator</title>
+    <title>Simple Calculator</title>
 </head>
 <body>
     <main class="wrapper">
-        <section class="screen" aria-label="Result Screen">0</section>
+        <!-- Display the result -->
+        <section class="result-screen" aria-label="Result Screen">0</section>
+        
+        <!-- Calculator Preview
+                   Result
 
+              C   | ← | ÷
+            7 | 8 | 9 | ×
+            4 | 5 | 6 | −
+            1 | 2 | 3 | +
+                0     | =
+        -->
+                
         <section class="calc-buttons">
             <div class="calc-button-row">
-                <button type="button" class="calc-button double" aria-label="Clear">C</button>
+                <button type="button" class="calc-button double-length" aria-label="Clear">C</button>
                 <button type="button" class="calc-button" aria-label="Backspace">&larr;</button>
                 <button type="button" class="calc-button" aria-label="Division">&divide;</button>
             </div>
@@ -41,7 +52,7 @@
             </div>
 
             <div class="calc-button-row">
-                <button type="button" class="calc-button triple">0</button>
+                <button type="button" class="calc-button triple-length">0</button>
                 <button type="button" class="calc-button" aria-label="Equal">&equals;</button>
             </div>
         </section>

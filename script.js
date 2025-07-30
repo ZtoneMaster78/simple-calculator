@@ -2,7 +2,7 @@ let runningTotal = 0;
 let buffer = "0";
 let previousOperator;
 
-const screen = document.querySelector('.screen');
+const result_screen = document.querySelector('.result-screen');
 
 function buttonClick(value) {
     if (isNaN(value)) {
@@ -13,7 +13,7 @@ function buttonClick(value) {
 
     if (isValidInput(value)) playClickSound();
 
-    screen.innerText = buffer;
+    result_screen.innerText = buffer;
 }
 
 function handleSymbol(symbol) {
@@ -127,7 +127,7 @@ function normalizeKey (key) {
     if (key === "*") return "×";
     if (key === "/") return "÷";
     if (key === "-") return "−";
-    return key; // '+" is still "+"
+    return key; // "+" is still "+"
 }
 
 function highlightButton(keyText) {
@@ -167,14 +167,14 @@ const hoverSound = new Audio("sounds/keyboard.mp3");
 
 function playClickSound() {
     const click = clickSound.cloneNode();
-    click.volume = 0.2;
+    click.volume = 0.5;
     click.play();
 }
 
 document.querySelectorAll('.calc-button').forEach(button => {
     button.addEventListener('mouseenter', () => {
         const hover = hoverSound.cloneNode(); // allow overlap
-        hover.volume = 0.3;
+        hover.volume = 0.5;
         hover.play();
     });
 });
